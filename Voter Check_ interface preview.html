@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Voter Check: interface preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@600;800&display=swap">
+<style>
+:root{--bg:#EDF1EE;--surface:#fff;--ink:#14201B;--muted:#55645D;--line:#CBD5CF;--brand:#0E4D3C;--on-brand:#fff;--ok:#0E6B4A;--okbg:#DDF1E7;--bad:#B3261E;--badbg:#FBE4E1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1814;--surface:#17231E;--ink:#E6EFEA;--muted:#9BAAA2;--line:#2A3A33;--brand:#4FBF98;--on-brand:#0A1410;--ok:#6FD6AB;--okbg:#173A2C;--bad:#F28B82;--badbg:#3F1D1A}}
+:root[data-theme="dark"]{--bg:#0F1814;--surface:#17231E;--ink:#E6EFEA;--muted:#9BAAA2;--line:#2A3A33;--brand:#4FBF98;--on-brand:#0A1410;--ok:#6FD6AB;--okbg:#173A2C;--bad:#F28B82;--badbg:#3F1D1A}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.5 "Atkinson Hyperlegible",system-ui,sans-serif;min-height:100vh;padding-bottom:5.5rem}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--brand);z-index:10}
+h1,h2,h3{font-family:"Bricolage Grotesque",Georgia,sans-serif;margin:0;line-height:1.15}
+.top{background:var(--brand);color:var(--on-brand);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.top h1{font-size:1.2rem;font-weight:800}.top small{opacity:.85;display:block;font-size:.85rem}
+.top button{background:transparent;border:1px solid currentColor;color:inherit;border-radius:.5rem;padding:.4rem .75rem;font:inherit;cursor:pointer}
+main{max-width:34rem;margin:0 auto;padding:1.25rem}
+h2{font-size:1.5rem;font-weight:800;margin-bottom:.25rem}.lead{color:var(--muted);margin:0 0 1.25rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1.1rem}
+label.f{display:block;font-weight:700;margin:.9rem 0 .3rem}
+input[type=text],input[type=search],input[type=tel],input[type=email],select{width:100%;font:inherit;color:inherit;background:var(--bg);border:1.5px solid var(--line);border-radius:.6rem;padding:.8rem .9rem}
+input:focus-visible,button:focus-visible,.btn:focus-within,select:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.idin{font-size:1.6rem;letter-spacing:.12em;font-variant-numeric:tabular-nums;text-align:center}
+.row{display:flex;gap:.6rem;margin-top:1rem}.row>*{flex:1}
+.btn,button.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;font:700 1rem "Atkinson Hyperlegible",sans-serif;background:var(--brand);color:var(--on-brand);border:2px solid var(--brand);border-radius:.6rem;padding:.8rem 1rem;cursor:pointer;min-height:3rem}
+.btn.ghost{background:transparent;color:var(--brand)}
+.stamp{margin:1.25rem 0 0;padding:1.1rem;border-radius:.75rem;border:1px solid var(--line);background:var(--surface)}
+.stamp .tag{display:inline-block;font:800 1.7rem "Bricolage Grotesque",sans-serif;padding:.2rem .8rem;border:4px double currentColor;border-radius:.4rem;transform:rotate(-2deg);margin-bottom:.8rem}
+.stamp.ok{background:var(--okbg);color:var(--ok)}.stamp.no{background:var(--badbg);color:var(--bad)}
+.stamp dl{margin:0;color:var(--ink);display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem}.stamp dt{color:var(--muted)}.stamp dd{margin:0;font-weight:700}
+.stamp p{margin:0;color:var(--ink)}
+.note{font-size:.9rem;color:var(--muted);margin-top:.8rem}
+ul.list{list-style:none;margin:1rem 0 0;padding:0;border:1px solid var(--line);border-radius:.75rem;background:var(--surface)}
+ul.list li{padding:.8rem 1rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem}
+ul.list li:last-child{border:0}ul.list b{display:block}ul.list span{color:var(--muted);font-size:.9rem}
+.num{font-variant-numeric:tabular-nums}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;background:none;border:0;border-top:3px solid transparent;color:var(--muted);font:700 .85rem "Atkinson Hyperlegible",sans-serif;padding:.8rem .2rem;cursor:pointer;min-height:3.4rem}
+nav button[aria-current=page]{color:var(--brand);border-top-color:var(--brand)}
+.login{max-width:26rem;margin:0 auto;padding:2.5rem 1.25rem}.login h1{font-size:2rem;font-weight:800;margin-bottom:.4rem}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.seg button{padding:.8rem;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:.6rem;font:700 1rem "Atkinson Hyperlegible",sans-serif;cursor:pointer}
+.seg button[aria-pressed=true]{border-color:var(--brand);background:var(--okbg);color:var(--ok)}
+.toast{position:fixed;left:50%;bottom:5.5rem;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.7rem 1.1rem;border-radius:.6rem;max-width:90%;z-index:20}
+[hidden]{display:none!important}
+.err{color:var(--bad);font-weight:700;margin:.5rem 0 0}
+@media (prefers-reduced-motion:no-preference){.stamp{animation:pop .25s ease-out}@keyframes pop{from{transform:scale(.97);opacity:.4}}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<script>
+var voters=[];
+var admins=[];
+var role="",user="",tab="check",result=null,q="";
+var $=function(s){return document.querySelector(s)};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function toast(m){var t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){t.hidden=true},2600)}
+function find(id){return voters.find(function(v){return v.id===id})}
+function validId(id){return /^\d{7,8}$/.test(id)}
+
+function render(){
+  if(!role){$("#app").innerHTML=loginView();return}
+  var tabs=[["check","Check"],["add","Add voter"],["records","Records"]];
+  if(role==="Super admin")tabs.push(["admins","Admins"]);
+  var body={check:checkView,add:addView,records:recordsView,admins:adminsView}[tab]();
+  $("#app").innerHTML='<header class="top"><div><h1>Voter Check</h1><small>Constituency · '+esc(role)+'</small></div><button onclick="logout()">Sign out</button></header><main>'+body+'</main><nav aria-label="Main">'+tabs.map(function(t){return '<button onclick="go(\''+t[0]+'\')"'+(tab===t[0]?' aria-current="page"':'')+'>'+t[1]+'</button>'}).join("")+'</nav>';
+}
+function go(t){tab=t;result=null;q="";render();window.scrollTo(0,0)}
+function logout(){role="";user="";render()}
+
+function loginView(){return '<div class="login"><h1>Voter Check</h1><p class="lead">Sign in to check and manage voter registration for your constituency.</p><div class="panel"><label class="f" for="nm">Your name</label><input type="text" id="nm" autocomplete="name" placeholder="Your full name"><label class="f" id="rl">Sign in as</label><div class="seg" role="group" aria-labelledby="rl"><button id="r1" aria-pressed="true" onclick="pick(\'Admin\')">Admin</button><button id="r2" aria-pressed="false" onclick="pick(\'Super admin\')">Super admin</button></div><div class="row"><button class="btn" onclick="login()">Sign in</button></div><p class="note">Preview only: no password needed yet. Real sign-in comes in the next build.</p></div></div>'}
+var picked="Admin";
+function pick(r){picked=r;$("#r1").setAttribute("aria-pressed",r==="Admin");$("#r2").setAttribute("aria-pressed",r==="Super admin")}
+function login(){user=$("#nm").value.trim()||"Guest";role=picked;tab="check";render()}
+
+function checkView(){
+  var r=result,out="";
+  if(r==="busy")out='<div class="stamp" role="status"><p>Reading ID…</p></div>';
+  else if(r&&r.err)out='<p class="err" role="alert">'+esc(r.err)+'</p>';
+  else if(r&&r.v)out='<div class="stamp ok" role="status"><span class="tag">Registered</span><dl><dt>Name</dt><dd>'+esc(r.v.name)+'</dd><dt>ID number</dt><dd class="num">'+esc(r.v.id)+'</dd><dt>Ward</dt><dd>'+esc(r.v.ward)+'</dd><dt>Polling station</dt><dd>'+esc(r.v.station)+'</dd></dl></div>';
+  else if(r&&r.none)out='<div class="stamp no" role="status"><span class="tag">Not registered</span><p>No voter with ID '+esc(r.none)+' was found in this constituency. Check the number and try again.</p></div>';
+  return '<h2>Check registration</h2><p class="lead">Type the ID number or scan the ID.</p><div class="panel"><label class="f" for="idn">ID number</label><input class="idin" id="idn" type="tel" inputmode="numeric" maxlength="8" placeholder="12345678" value="'+esc(r&&r.val||"")+'" onkeydown="if(event.key===\'Enter\')check()"><div class="row"><button class="btn" onclick="check()">Check registration</button><label class="btn ghost" style="cursor:pointer"><input type="file" accept="image/*" capture="environment" hidden onchange="scan(this)">Scan ID</label></div><p class="note">Scanning is not connected yet. Real ID reading comes in the next build.</p></div>'+out;
+}
+function check(){var id=$("#idn").value.trim();if(!validId(id)){result={err:"Enter a 7 or 8 digit ID number.",val:id};render();return}var v=find(id);result=v?{v:v,val:id}:{none:id,val:id};render()}
+function scan(inp){if(!inp.files.length)return;toast("Scanning is not connected yet. Type the ID number for now.")}
+
+function addView(){return '<h2>Add a voter</h2><p class="lead">Enter one registered voter at a time.</p><div class="panel"><label class="f" for="an">Full name</label><input type="text" id="an" autocomplete="off"><label class="f" for="ai">ID number</label><input type="tel" inputmode="numeric" maxlength="8" id="ai"><label class="f" for="aw">Ward</label><input type="text" id="aw" list="wards"><datalist id="wards">'+wardOpts()+'</datalist><label class="f" for="as">Polling station</label><input type="text" id="as"><p class="err" id="aerr" role="alert"></p><div class="row"><button class="btn" onclick="addVoter()">Save voter</button></div></div>'}
+function wardOpts(){var s={};voters.forEach(function(v){s[v.ward]=1});return Object.keys(s).map(function(w){return '<option value="'+esc(w)+'"></option>'}).join("")}
+function addVoter(){var v={name:$("#an").value.trim(),id:$("#ai").value.trim(),ward:$("#aw").value.trim(),station:$("#as").value.trim()},e=$("#aerr");
+  if(!v.name||!v.ward||!v.station){e.textContent="Fill in every field.";return}
+  if(!validId(v.id)){e.textContent="Enter a 7,8 or 9 digit ID number.";return}
+  if(find(v.id)){e.textContent="This ID number is already registered.";return}
+  voters.unshift(v);toast("Voter saved");go("records")}
+
+function recordsView(){
+  var l=voters.filter(function(v){var s=q.toLowerCase();return !s||v.name.toLowerCase().includes(s)||v.id.includes(s)||v.ward.toLowerCase().includes(s)});
+  return '<h2>Records</h2><p class="lead"><span class="num">'+voters.length+'</span> registered voters in this constituency.</p><input type="search" id="qs" placeholder="Search name, ID or ward" value="'+esc(q)+'" oninput="search(this)"><div class="row"><label class="btn ghost" style="cursor:pointer"><input type="file" accept=".csv,text/csv" hidden onchange="importCsv(this)">Import CSV</label></div><p class="note">CSV columns: name, id, ward, station.</p><ul class="list">'+(l.length?l.map(function(v){return '<li><div><b>'+esc(v.name)+'</b><span>'+esc(v.ward)+' · '+esc(v.station)+'</span></div><span class="num">'+esc(v.id)+'</span></li>'}).join(""):'<li><span>'+(voters.length?"No voters match your search.":"No voters yet. Add a voter or import a CSV.")+'</span></li>')+'</ul>';
+}
+function search(el){q=el.value;var p=el.selectionStart;render();var n=$("#qs");n.focus();n.setSelectionRange(p,p)}
+function importCsv(inp){var f=inp.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var n=0;String(rd.result).split(/\r?\n/).forEach(function(line){var c=line.split(",").map(function(x){return x.trim()});if(c.length<4||!validId(c[1])||find(c[1]))return;voters.push({name:c[0],id:c[1],ward:c[2],station:c[3]});n++});toast(n+" voters imported");render()};rd.readAsText(f)}
+
+function adminsView(){return '<h2>Admins</h2><p class="lead">Only the super admin can add or see admins.</p><ul class="list">'+(admins.length?"":'<li><span>No admins yet. Add the first one below.</span></li>')+admins.map(function(a){return '<li><div><b>'+esc(a.name)+'</b><span>'+esc(a.email)+'</span></div><span>'+esc(a.role)+'</span></li>'}).join("")+'</ul><div class="panel" style="margin-top:1rem"><h3>Add an admin</h3><label class="f" for="dn">Name</label><input type="text" id="dn"><label class="f" for="de">Email</label><input type="email" id="de"><p class="err" id="derr" role="alert"></p><div class="row"><button class="btn" onclick="addAdmin()">Add admin</button></div></div>'}
+function addAdmin(){var n=$("#dn").value.trim(),e=$("#de").value.trim();if(!n||!/^\S+@\S+\.\S+$/.test(e)){$("#derr").textContent="Enter a name and a valid email.";return}admins.push({name:n,email:e,role:"Admin"});toast("Admin added");render()}
+render();
+</script>
+</body>
+</html>
