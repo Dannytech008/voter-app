@@ -94,7 +94,7 @@ function addView(){return '<h2>Add a voter</h2><p class="lead">Enter one registe
 function wardOpts(){var s={};voters.forEach(function(v){s[v.ward]=1});return Object.keys(s).map(function(w){return '<option value="'+esc(w)+'"></option>'}).join("")}
 function addVoter(){var v={name:$("#an").value.trim(),id:$("#ai").value.trim(),ward:$("#aw").value.trim(),station:$("#as").value.trim()},e=$("#aerr");
   if(!v.name||!v.ward||!v.station){e.textContent="Fill in every field.";return}
-  if(!validId(v.id)){e.textContent="Enter a 7,8 or 9 digit ID number.";return}
+  if(!validId(v.id)){e.textContent="Enter a 7 or 8 digit ID number.";return}
   if(find(v.id)){e.textContent="This ID number is already registered.";return}
   voters.unshift(v);toast("Voter saved");go("records")}
 
